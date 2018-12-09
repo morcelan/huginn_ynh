@@ -76,16 +76,16 @@ trap exit_properly ERR
     cd /home/huginn
 
     # Clone Huginn repository
-    sudo -u huginn -H git clone https://github.com/cantino/huginn.git -b master huginn
+    sudo sudo -u huginn -H git clone https://github.com/cantino/huginn.git -b master huginn
 
     # Go to Huginn installation folder
     cd /home/huginn/huginn
 
     # Copy the example Huginn config
-    sudo -u huginn -H cp .env.example .env
+    sudo sudo -u huginn -H cp .env.example .env
 
     # Create the log/, tmp/pids/ and tmp/sockets/ directories
-    sudo -u huginn mkdir -p log tmp/pids tmp/sockets
+    sudo sudo -u huginn mkdir -p log tmp/pids tmp/sockets
 
     # Make sure Huginn can write to the log/ and tmp/ directories
     sudo chown -R huginn log/ tmp/
@@ -97,37 +97,37 @@ trap exit_properly ERR
     sudo sudo -u huginn -H chmod o-rwx .env
 
     # Copy the example Unicorn config
-    sudo -u huginn -H cp config/unicorn.rb.example config/unicorn.rb
+    sudo sudo -u huginn -H cp config/unicorn.rb.example config/unicorn.rb
 
     #Install Gems
-     sudo -u huginn -H bundle install --deployment --without development test
+     sudo sudo -u huginn -H bundle install --deployment --without development test
 
 #rake secret
-RAKE_SECRET=$(sudo sudo -u huginn -H rake secret)
+RAKE_SECRET=$(sudo sudo -u huginn -H bundle exec rake secret)
 
 #Edit .env
 
-  sudo -u huginn -H sed -i "s/\(DATABASE_PASSWORD *= *\).*/\1\"$db_pwd\"/" .env
-  sudo -u huginn -H sed -i "s/\(DATABASE_USERNAME *= *\).*/\1\"huginn\"/" .env
-  sudo -u huginn -H sed -i "s/\(DATABASE_NAME *= *\).*/\1huginn_production/" .env
-  sudo -u huginn -H sed -i "s/\(APP_SECRET_TOKEN *= *\).*/\1$RAKE_SECRET/" .env
-  sudo -u huginn -H sed -i "s/\(INVITATION_CODE *= *\).*/\1$invitation/" .env
+  sudo sudo -u huginn -H sed -i "s/\(DATABASE_PASSWORD *= *\).*/\1\"$db_pwd\"/" .env
+  sudo sudo -u huginn -H sed -i "s/\(DATABASE_USERNAME *= *\).*/\1\"huginn\"/" .env
+  sudo sudo -u huginn -H sed -i "s/\(DATABASE_NAME *= *\).*/\1huginn_production/" .env
+  sudo sudo -u huginn -H sed -i "s/\(APP_SECRET_TOKEN *= *\).*/\1$RAKE_SECRET/" .env
+  sudo sudo -u huginn -H sed -i "s/\(INVITATION_CODE *= *\).*/\1$invitation/" .env
 
 	#uncomment RAILS_ENV
-	sudo -u huginn -H sed -i '/# RAILS_ENV=production/s/^# //' .env
+	sudo sudo -u huginn -H sed -i '/# RAILS_ENV=production/s/^# //' .env
 
 
 # Create the database
-sudo -u huginn -H bundle exec rake db:create RAILS_ENV=production
+sudo sudo -u huginn -H bundle exec rake db:create RAILS_ENV=production
 
 # Migrate to the latest version
-sudo -u huginn -H bundle exec rake db:migrate RAILS_ENV=production
+sudo sudo -u huginn -H bundle exec rake db:migrate RAILS_ENV=production
 
 # Create admin user and example agents
-sudo -u huginn -H bundle exec rake db:seed RAILS_ENV=production SEED_USERNAME=$admin SEED_PASSWORD=$admin_pwd
+sudo sudo -u huginn -H bundle exec rake db:seed RAILS_ENV=production SEED_USERNAME=$admin SEED_PASSWORD=$admin_pwd
 
 # Compile Assets
-sudo -u huginn -H bundle exec rake assets:precompile RAILS_ENV=production
+sudo sudo -u huginn -H bundle exec rake assets:precompile RAILS_ENV=production
 
 #Edit the `Procfile` 
 cd $old_pwd
@@ -135,7 +135,7 @@ sudo cp ../conf/Procfile /home/huginn/huginn/
 cd /home/huginn/huginn/
 
 #Export the init scripts:
-sudo rake production:export
+sudo sudo rake production:export
 
 ### Setup Logrotate
 sudo cp deployment/logrotate/huginn /etc/logrotate.d/huginn
