@@ -41,7 +41,7 @@ sudo apt-get remove -y ruby1.8 ruby1.9 -qq
    curl -L --silent http://cache.ruby-lang.org/pub/ruby/2.5/ruby-2.5.1.tar.bz2 | tar xj
    cd ruby-2.5.1
    ./configure --disable-install-rdoc > /dev/null
-   make -j -s `nproc`
+   make -j`nproc`
    sudo make install
 
 #Install the bundler and foreman gems:
