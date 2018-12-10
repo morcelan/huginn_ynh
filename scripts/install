@@ -23,7 +23,7 @@ if [[ ! $? -eq 0 ]]; then
 fi
 
 #Import node.js repository (can be skipped on Ubuntu and Debian Jessie):
-curl -sL https://deb.nodesource.com/setup_0.12 | sudo bash -
+#curl -sL https://deb.nodesource.com/setup_0.12 | sudo bash -
 
 # Install dependencies
 #sudo apt-get update -qq
@@ -76,7 +76,7 @@ trap exit_properly ERR
     cd /home/huginn
 
     # Clone Huginn repository
-    sudo sudo -u huginn -H git clone https://github.com/cantino/huginn.git -b master huginn
+    #sudo sudo -u huginn -H git clone https://github.com/cantino/huginn.git -b master huginn
 
     # Go to Huginn installation folder
     cd /home/huginn/huginn
