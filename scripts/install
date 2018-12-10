@@ -79,28 +79,28 @@ trap exit_properly ERR
     #sudo sudo -u huginn -H git clone https://github.com/cantino/huginn.git -b master huginn
 
     # Go to Huginn installation folder
-    cd /home/huginn/huginn
+    #cd /home/huginn/huginn
 
     # Copy the example Huginn config
-    sudo sudo -u huginn -H cp .env.example .env
+    #sudo sudo -u huginn -H cp .env.example .env
 
     # Create the log/, tmp/pids/ and tmp/sockets/ directories
-    sudo sudo -u huginn mkdir -p log tmp/pids tmp/sockets
+    #sudo sudo -u huginn mkdir -p log tmp/pids tmp/sockets
 
     # Make sure Huginn can write to the log/ and tmp/ directories
-    sudo chown -R huginn log/ tmp/
-    sudo chmod -R u+rwX,go-w log/ tmp/
+    #sudo chown -R huginn log/ tmp/
+    #sudo chmod -R u+rwX,go-w log/ tmp/
 
     # Make sure permissions are set correctly
-    sudo chmod -R u+rwX,go-w log/
-    sudo chmod -R u+rwX tmp/
-    sudo sudo -u huginn -H chmod o-rwx .env
+    #sudo chmod -R u+rwX,go-w log/
+    #sudo chmod -R u+rwX tmp/
+    #sudo sudo -u huginn -H chmod o-rwx .env
 
     # Copy the example Unicorn config
-    sudo sudo -u huginn -H cp config/unicorn.rb.example config/unicorn.rb
+    #sudo sudo -u huginn -H cp config/unicorn.rb.example config/unicorn.rb
 
     #Install Gems
-     sudo sudo -u huginn -H bundle install --deployment --without development test
+    # sudo sudo -u huginn -H bundle install --deployment --without development test
 
 #rake secret
 RAKE_SECRET=$(sudo sudo -u huginn -H bundle exec rake secret)
